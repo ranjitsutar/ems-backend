@@ -31,15 +31,27 @@ public class EmployeeController {
         return ResponseEntity.ok(empployeeDto);
     }
 
-    // Build GE All Employee REST API
+    // Build Get All Employee REST API
 
     @GetMapping("/alllEmployees")
     public  ResponseEntity<List<EmpployeeDto>> getAllEmploye(){
 
         List<EmpployeeDto> empployees= employeeService.getAllEmployee();
         return ResponseEntity.ok(empployees);
+    }
 
+    // Build Update Employee REST API
+@PutMapping("/update/{id}")
+    public ResponseEntity<EmpployeeDto> updateEmployee(@PathVariable("id") Long employeeId,@RequestBody EmpployeeDto updateEmpployee){
 
+       EmpployeeDto updateEmployee= employeeService.updateEmployee(employeeId,updateEmpployee);
+       return ResponseEntity.ok(updateEmployee);
+    }
 
+    // Build Delete Employee REST API
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteEmployeeById(@PathVariable("id") Long employeeId){
+        employeeService.deleteEmployee(employeeId);
+    return ResponseEntity.ok("Delete Employee Successfully!>>");
     }
 }
